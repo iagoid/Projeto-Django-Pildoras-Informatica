@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+{% for post in posts %}
+
+<section class="page-section clearfix">
+  <div class="container">
+    <div class="intro">
+        {% if post.imagem %}
+            <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{ post.imagem.url }}" alt="" style="width: 50%" />
+        {% endif %}
+      <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+        <h2 class="section-heading mb-4">
+          <span class="section-heading-lower">{{ post.titulo }}</span>
+          <span class="section-heading-upper">{{ post.contenido }}</span>
+        </h2>
+
+        <div style="text-align: left">
+          <h6>Autor: {{ post.autor }}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endfor %} 
+
+<section>
+    <div style="width: 75%; margin: auto; text-align: center; color: white;">
+        <h4>Categorias:</h4>
+        {% for post in posts %}
+            {% for categoria in post.categorias.all %}
+                {{ categoria.nombre }}&nbsp;, &nbsp;
+            {% endfor %}
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock content %}
